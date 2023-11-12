@@ -1,5 +1,4 @@
 from fn.losses import DiceLoss
-from fn.metrics import dice_coe
 from dataset import BrainTumor, transforms
 from train import Trainer
 from model.vgg16_unet import VGG16Unet
@@ -23,8 +22,9 @@ print(len(images))
 print(len(labels))
 
 model = VGG16Unet()
+print(model)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 loss = DiceLoss()
 
-trainer = Trainer(model, "cuda", optimizer, loss)
+trainer = Trainer(model, "cuda:0", optimizer, loss)
 trainer.fit(10, training_data=loader)

@@ -1,4 +1,3 @@
-import torch
 from tqdm import tqdm
 from fn.metrics import dice_coe
 
