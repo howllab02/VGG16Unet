@@ -21,7 +21,7 @@ class VGG16Unet(nn.Module):
         self.DeBlock3 = DouConvBlock(128, 128)
         self.DeBlock4 = DouConvBlock(64, 64)
 
-        self.OutputLayer = nn.Conv2d(64, 3, kernel_size=3, stride=1, padding=1)
+        self.OutputLayer = nn.Conv2d(64, 1, kernel_size=3, stride=1, padding=1)
 
     def forward(self, tensor):
         skip1, pool1 = EncoderLayer(conv_block=self.EnBlock1)(tensor)
