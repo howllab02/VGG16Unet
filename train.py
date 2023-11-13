@@ -7,7 +7,7 @@ class Trainer:
         self.model = model
         self.device = device
         self.optimizer = optimizer
-        self.loss_fn = loss_fn.to(device)
+        self.loss_fn = loss_fn
 
     def fit(self, max_epoch, training_data):
         self.model = self.model.to(self.device)
