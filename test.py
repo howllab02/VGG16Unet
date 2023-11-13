@@ -10,3 +10,7 @@ print(image.shape)
 model.eval()
 result = model(image)
 print(result.shape)
+
+writer = SummaryWriter('runs/fashion_mnist_experiment_1')
+writer.add_graph(model, image)
+writer.close()

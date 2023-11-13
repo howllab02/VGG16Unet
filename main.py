@@ -16,7 +16,7 @@ files = list_path
 
 data = BrainTumor(path_data=files, transform=transforms)
 print(len(data))
-loader = DataLoader(data, num_workers=2, batch_size=156)
+loader = DataLoader(data, num_workers=2, batch_size=256)
 images, labels = next(iter(loader))
 print(len(images))
 print(len(labels))
