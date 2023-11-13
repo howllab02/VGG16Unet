@@ -72,7 +72,9 @@ class DecoderLayer(nn.Module):
 
     def forward(self, skip, pool):
         up = self.transpose(pool)
-        connect_skip = torch.cat([up, skip])
+        print("up:", up.shape)
+        connect_skip = torch.concat([up, skip], dim=2)
+        print("cat:", connect_skip.shape)
         out = self.block(connect_skip)
         return out
 

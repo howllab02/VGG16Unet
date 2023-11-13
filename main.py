@@ -16,7 +16,7 @@ files = list_path
 
 data = BrainTumor(path_data=files, transform=transforms)
 print(len(data))
-loader = DataLoader(data, num_workers=2, batch_size=16)
+loader = DataLoader(data, num_workers=2, batch_size=156)
 images, labels = next(iter(loader))
 print(len(images))
 print(len(labels))
@@ -26,5 +26,5 @@ print(model)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 loss = DiceLoss()
 
-trainer = Trainer(model, "cuda:0", optimizer, loss)
+trainer = Trainer(model, "cuda", optimizer, loss)
 trainer.fit(10, training_data=loader)

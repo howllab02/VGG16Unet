@@ -21,7 +21,7 @@ class VGG16Unet(nn.Module):
         self.DeBlock3 = DouConvBlock(128, 128)
         self.DeBlock4 = DouConvBlock(64, 64)
 
-        self.OutputLayer = nn.Conv2d(64, 1, kernel_size=3, stride=1, padding=1)
+        self.OutputLayer = nn.Conv2d(64, 1, kernel_size=1)
 
     def forward(self, tensor):
         skip1, pool1 = EncoderLayer(conv_block=self.EnBlock1)(tensor)
@@ -31,8 +31,10 @@ class VGG16Unet(nn.Module):
 
         pool5 = self.CenterBlock5(pool4)
 
+        # print(pool5.shape)
         cat1 = (DecoderLayer(conv_block=self.DeBlock1, in_channel=512,
                              out_channel=512)(skip4, pool5))
+        # print(cat1.shape)
         cat2 = DecoderLayer(conv_block=self.DeBlock2, in_channel=512,
                             out_channel=256)(skip3, cat1)
         cat3 = DecoderLayer(conv_block=self.DeBlock3, in_channel=256,
@@ -41,5 +43,6 @@ class VGG16Unet(nn.Module):
                             out_channel=64)(skip1, cat3)
 
         out = self.OutputLayer(cat4)
+        # print(out.shape)
 
-        return sigmoid(out)
+        return out

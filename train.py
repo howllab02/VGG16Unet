@@ -7,7 +7,7 @@ class Trainer:
         self.model = model
         self.device = device
         self.optimizer = optimizer
-        self.loss_fn = loss_fn
+        self.loss_fn = loss_fn.to(device)
 
     def fit(self, max_epoch, training_data):
         self.model = self.model.to(self.device)
@@ -20,7 +20,11 @@ class Trainer:
                 images = images.to(self.device)
                 labels = labels.to(self.device)
 
+                print("images:", images.shape)
+
+                print("labels:", labels.shape)
                 outputs = self.model(images)
+                print(outputs.shape)
                 loss = self.loss_fn(outputs, labels)
 
                 self.optimizer.zero_grad()

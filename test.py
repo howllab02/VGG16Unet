@@ -4,13 +4,9 @@ import torch
 model = VGG16Unet()
 print(model)
 
-example_input = torch.zeros((3, 256, 256)).unsqueeze(0)
-
-yhat = model(example_input)
-print(yhat)
+image = torch.zeros((1, 3, 256, 256))
+print(image.shape)
 
 model.eval()
-writer = SummaryWriter('runs/unet_model')
-writer.add_graph(model, example_input)
-writer.close()
-
+result = model(image)
+print(result.shape)
